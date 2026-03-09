@@ -2,63 +2,102 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\Models\CarImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $cars = Car::latest()->paginate(10);
+
+        return view('admin.cars.index', compact('cars'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.cars.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer',
+            'price' => 'required|numeric',
+            'top_speed' => 'required|integer',
+            'fuel_type' => 'required|string|max:255',
+            'transmission' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'stock' => 'required|integer',
+            'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        $car = Car::create($data); // simpan mobil dulu
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image')->store('cars', 'public');
+            CarImage::create([
+                'car_id' => $car->id,
+                'image_url' => $file, // pastikan nama field sama dengan DB
+            ]);
+        }
+
+        return redirect()->route('cars.index')->with('success', 'Car added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Car $car)
     {
-        //
+        return view('admin.cars.show', compact('car'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Car $car)
     {
-        //
+        return view('admin.cars.edit', compact('car'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Car $car)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer',
+            'price' => 'required|numeric',
+            'top_speed' => 'required|integer',
+            'fuel_type' => 'required|string|max:255',
+            'transmission' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'stock' => 'required|integer',
+            'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        $car->update($data); // update data mobil
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image')->store('cars', 'public');
+            CarImage::create([
+                'car_id' => $car->id,
+                'image' => $file,
+            ]);
+        }
+
+        return redirect()->route('admin.cars.index')->with('success', 'Car updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Car $car)
     {
-        //
+        foreach ($car->carImages as $img) {
+            Storage::disk('public')->delete($img->image);
+            $img->delete();
+        }
+
+        $car->delete();
+
+        return redirect()->route('admin.cars.index')->with('success', 'Car deleted successfully!');
     }
 }

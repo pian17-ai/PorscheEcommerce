@@ -8,21 +8,25 @@ class Car extends Model
 {
     protected $fillable = [
         'name',
-        'brand',
         'model',
         'year',
         'price',
-        'mileage',
+        'top_speed',
         'fuel_type',
         'transmission',
         'color',
         'stock',
         'description',
+        // 'image_url'
     ];
 
     public function reviews() {
         return $this->hasMany(Review::class);
     }
+
+    // public function carImages() {
+    //     return $this->hasMany(CarImage::class, 'image_url');
+    // }
 
     public function carImages() {
         return $this->hasMany(CarImage::class);
