@@ -82,11 +82,11 @@ class CarController extends Controller
             $file = $request->file('image')->store('cars', 'public');
             CarImage::create([
                 'car_id' => $car->id,
-                'image' => $file,
+                'image_url' => $file,
             ]);
         }
 
-        return redirect()->route('admin.cars.index')->with('success', 'Car updated successfully!');
+        return redirect()->route('cars.index')->with('success', 'Car updated successfully!');
     }
 
     public function destroy(Car $car)
@@ -98,6 +98,6 @@ class CarController extends Controller
 
         $car->delete();
 
-        return redirect()->route('admin.cars.index')->with('success', 'Car deleted successfully!');
+        return redirect()->route('cars.index')->with('success', 'Car deleted successfully!');
     }
 }

@@ -43,7 +43,7 @@
                     <td class="py-2 px-4">
                         @if ($car->carImages->count())
                             @foreach ($car->carImages as $img)
-                                <img src="{{ asset('storage/' . $img->image_url) }}" class="w-32 h-20 object-cover rounded">
+                                <img src="{{ asset('storage/' . $img->image_url) }}" class="w-48 h-12 object-cover rounded">
                             @endforeach
                         @else
                             -

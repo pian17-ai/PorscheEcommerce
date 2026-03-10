@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
-    return view('home');
-});
+Route::get('/', [HomeController::class,'index'])->name('home');
 
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -21,10 +21,7 @@ Route::middleware('auth', 'admin')->group(function() {
         return view('layouts.admin');
     });
 
-    Route::get('/dashboard/cars', function () {
-        return view('admin.cars.index');
-    });
-
     Route::resource('/dashboard/cars', CarController::class);
 
+    Route::resource('/dashboard/orders', OrderController::class);
 });

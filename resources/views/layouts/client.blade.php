@@ -20,7 +20,7 @@
             </div>
 
             <!-- Menu -->
-            <ul class="flex space-x-6">
+            {{-- <ul class="flex space-x-6">
                 <li>
                     <a href="{{ url('/') }}" class="hover:text-gray-200">Home</a>
                 </li>
@@ -33,7 +33,7 @@
                 <li>
                     <a href="{{ url('/contact') }}" class="hover:text-gray-200">Contact</a>
                 </li>
-            </ul>
+            </ul> --}}
 
             <div class="flex items-center gap-2">
                 @auth

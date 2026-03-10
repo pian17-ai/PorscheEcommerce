@@ -47,32 +47,32 @@
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Top Speed</label>
-        <input type="number" step="0.01" name="top_speed" value="{{ old('top_speed', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="number" step="0.01" name="top_speed" value="{{ old('top_speed', $car->top_speed ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Fuel Type</label>
-        <input type="text" step="0.01" name="fuel_type" value="{{ old('fuel_type', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="text" step="0.01" name="fuel_type" value="{{ old('fuel_type', $car->fuel_type ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Transmission</label>
-        <input type="text" step="0.01" name="transmission" value="{{ old('transmission', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="text" step="0.01" name="transmission" value="{{ old('transmission', $car->transmission ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Color</label>
-        <input type="text" step="0.01" name="color" value="{{ old('color', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="text" step="0.01" name="color" value="{{ old('color', $car->color ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Stock</label>
-        <input type="number" step="0.01" name="stock" value="{{ old('stock', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="number" step="0.01" name="stock" value="{{ old('stock', $car->stock ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
         <label class="block mb-1 font-medium">Description</label>
-        <input type="text" step="0.01" name="description" value="{{ old('description', $car->price ?? '') }}" class="w-full border px-3 py-2 rounded" required>
+        <input type="text" step="0.01" name="description" value="{{ old('description', $car->description ?? '') }}" class="w-full border px-3 py-2 rounded" required>
     </div>
 
     <div class="mb-4">
