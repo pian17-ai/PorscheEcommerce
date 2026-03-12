@@ -16,6 +16,14 @@ class HomeController extends Controller
             ->where('model', 'taycan')
             ->first();
 
-        return view('home', compact('p911', 'taycan'));
+        $p718 = Car::with('carImages')
+            ->where('model', '718')
+            ->first();
+
+        $panamera = Car::with('carImages')
+            ->where('model', 'panamera')
+            ->first();
+
+        return view('home', compact('p911', 'taycan', 'p718', 'panamera'));
     }
 }

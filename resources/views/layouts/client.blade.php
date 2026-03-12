@@ -15,25 +15,32 @@
         <div class="container mx-auto flex justify-between items-center p-4">
 
             <!-- Logo -->
-            <div class="text-xl font-bold">
-                <img src={{ asset('/images/webdesigns/porschetext.png') }} alt="Placeholder Image" class="h-6">
-            </div>
+            <a href="/">
+                <div class="text-xl font-bold">
+                    <img src={{ asset('/images/webdesigns/porschetext.png') }} alt="Placeholder Image" class="h-6">
+                </div>
+            </a>
 
             <!-- Menu -->
-            {{-- <ul class="flex space-x-6">
+            <ul class="flex space-x-6">
                 <li>
-                    <a href="{{ url('/') }}" class="hover:text-gray-200">Home</a>
+                    <a href="{{ url('/') }}" class="hover:text-gray-500">Home</a>
                 </li>
                 <li>
-                    <a href="{{ url('/cars') }}" class="hover:text-gray-200">Cars</a>
+                    <a href="{{ route('client.orders.index') }}" class="hover:text-gray-500">
+                        My Orders
+                    </a>
                 </li>
                 <li>
+                    <a href="{{ url('/cars') }}" class="hover:text-gray-200">All Cars</a>
+                </li>
+                {{-- <li>
                     <a href="{{ url('/about') }}" class="hover:text-gray-200">About</a>
                 </li>
                 <li>
                     <a href="{{ url('/contact') }}" class="hover:text-gray-200">Contact</a>
-                </li>
-            </ul> --}}
+                </li> --}}
+            </ul>
 
             <div class="flex items-center gap-2">
                 @auth
