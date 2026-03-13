@@ -56,7 +56,7 @@
                     </td>
 
                     <td class="py-2 px-4">
-                        ${{ number_format($order->total_price, 2) }}
+                        Rp.{{ number_format($order->total_price, 2) }}
                     </td>
 
                     <td class="py-2 px-4">
@@ -65,7 +65,9 @@
                             @csrf
                             @method('PUT')
 
-                            <select name="status" onchange="this.form.submit()" class="border px-2 py-1 rounded">
+                            <select onchange="handleStatusChange(this, {{ $order->id }})"
+                                class="border px-2 py-1 rounded">
+
 
                                 <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="paid" {{ $order->status == 'paid' ? 'selected' : '' }}>Paid</option>
@@ -106,5 +108,47 @@
     <div class="mt-4">
         {{ $orders->links() }}
     </div>
+
+    <script>
+        function handleStatusChange(select, orderId) {
+
+            const status = select.value;
+
+            if (status === 'shipping') {
+
+                window.location.href = `/dashboard/orders/${orderId}/delivery/create`;
+
+            } else {
+
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/dashboard/orders/${orderId}`;
+
+                const csrf = document.createElement('input');
+                csrf.type = 'hidden';
+                csrf.name = '_token';
+                csrf.value = '{{ csrf_token() }}';
+
+                const method = document.createElement('input');
+                method.type = 'hidden';
+                method.name = '_method';
+                method.value = 'PUT';
+
+                const statusInput = document.createElement('input');
+                statusInput.type = 'hidden';
+                statusInput.name = 'status';
+                statusInput.value = status;
+
+                form.appendChild(csrf);
+                form.appendChild(method);
+                form.appendChild(statusInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+        }
+    </script>
+
 
 @endsection

@@ -1,26 +1,67 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Home')
+@section('title', 'Users')
+@section('page-title', 'Users')
 
 @section('content')
-    <h1 class="text-4xl font-bold text-white mb-4">Welcome to CarStore</h1>
-    <p class="text-white/80 mb-6">
-        Explore our collection of the best cars available. Browse, compare, and find your dream car today!
-    </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Contoh Card Mobil -->
-        <div class="bg-white/20 backdrop-blur-md p-4 rounded-lg shadow-lg text-white">
-            <h2 class="font-bold text-xl mb-2">Car Model A</h2>
-            <p>High performance, stylish design, comfortable interior.</p>
-        </div>
-        <div class="bg-white/20 backdrop-blur-md p-4 rounded-lg shadow-lg text-white">
-            <h2 class="font-bold text-xl mb-2">Car Model B</h2>
-            <p>Eco-friendly, modern features, and great fuel efficiency.</p>
-        </div>
-        <div class="bg-white/20 backdrop-blur-md p-4 rounded-lg shadow-lg text-white">
-            <h2 class="font-bold text-xl mb-2">Car Model C</h2>
-            <p>Luxury interior, advanced safety, and smooth ride quality.</p>
-        </div>
+    <div class="flex justify-between mb-4">
+        <h2 class="text-xl font-bold">Users List</h2>
     </div>
+
+    <table class="min-w-full bg-white rounded shadow overflow-hidden">
+
+        <thead class="bg-gray-100">
+
+            <tr>
+                <th class="py-2 px-4 text-left">#</th>
+                <th class="py-2 px-4 text-left">Name</th>
+                <th class="py-2 px-4 text-left">Email</th>
+                <th class="py-2 px-4 text-left">Phone</th>
+                <th class="py-2 px-4 text-left">Role</th>
+                <th class="py-2 px-4 text-left">Registered</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach ($users as $user)
+                <tr class="border-b">
+
+                    <td class="py-2 px-4">
+                        {{ $loop->iteration }}
+                    </td>
+
+                    <td class="py-2 px-4">
+                        {{ $user->name }}
+                    </td>
+
+                    <td class="py-2 px-4">
+                        {{ $user->email }}
+                    </td>
+
+                    <td class="py-2 px-4">
+                        {{ $user->phone }}
+                    </td>
+
+                    <td class="py-2 px-4">
+                        {{ $user->role }}
+                    </td>
+
+                    <td class="py-2 px-4">
+                        {{ $user->created_at}}
+                    </td>
+
+                </tr>
+            @endforeach
+
+        </tbody>
+
+    </table>
+
+    <div class="mt-4">
+        {{ $users->links() }}
+    </div>
+
 @endsection

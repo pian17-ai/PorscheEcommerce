@@ -32,6 +32,10 @@
                 Orders
             </a>
 
+            <a href="/dashboard/deliveries" class="block px-6 py-3 hover:bg-gray-800">
+                Deliveries
+            </a>
+
             <a href="/dashboard/users" class="block px-6 py-3 hover:bg-gray-800">
                 Users
             </a>

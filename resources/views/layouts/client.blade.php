@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-gradient-to-br from-blue-200 via-white to-blue-400 flex flex-col min-h-screen">
+<body class="bg-gradient-to-br flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full bg-white/10 backdrop-blur-md border-b border-white/20 z-50">
